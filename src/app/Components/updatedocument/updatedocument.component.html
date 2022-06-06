@@ -1,0 +1,99 @@
+<div class="header col-9 p-2 text-center">
+  <h2>Update Document</h2>
+</div>
+<div class="divform col-9">
+
+ <form [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)">
+  <div class="mb-2">
+
+    <input type="hidden" formControlName="id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [value]="onedocument.id">
+
+  </div>
+   <div class="mb-2">
+     <label for="exampleInputEmail1" class="form-label">Name Document</label>
+     <input type="text" formControlName="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [value]="onedocument.name">
+
+   </div>
+   <div *ngIf="formdata.controls['name'].invalid && (formdata.controls['name'].dirty || formdata.controls['name'].touched)" class="alert">
+    <div  class="text-danger">
+    Name is required
+  </div>
+
+</div>
+
+   <div class="mb-2">
+     <label for="exampleInputPassword1" class="form-label">File</label>
+     <input type="file" #file formControlName="documents" class="form-control" id="exampleInputPassword1" (change)="uploadFile(file.files)">
+   </div>
+   <div class="progress form-group" *ngIf="progress > 0">
+     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+     </div>
+ </div>
+
+ <ng-container  *ngFor="let doc of onedocument.documents">
+
+  <p class="filebody" > {{doc.path}} <i class="fa fa-times"  aria-hidden="true" (click)="deletefile(doc.id)"></i>   </p>
+
+  </ng-container>
+
+
+
+
+   <div class="form-group mb-2">
+     <label for="disabledSelect" class="form-label">Select Proiroty</label>
+     <select class="form-control" formControlName="priorityId" >
+        <option> select Proiroty </option>
+       <ng-container *ngFor="let item of priorityList">
+              <option [value]="item.id" selected [selected]="item.id== onedocument.priorityId">{{item.name}}</option>
+       </ng-container>
+
+     </select>
+   </div>
+
+   <div *ngIf="formdata.controls['priorityId'].invalid && (formdata.controls['priorityId'].dirty || formdata.controls['priorityId'].touched)" class="alert">
+
+          <div  class="text-danger">
+            priority is required
+        </div>
+
+    </div>
+
+   <div class="form-group mb-2">
+     <label  class="form-label" >Date</label>
+     <input class="form-control" formControlName="date"   type="text" onfocus="this.type='date'" placeholder="Select Date">
+   </div>
+
+   <div *ngIf="formdata.controls['date'].invalid && (formdata.controls['date'].dirty || formdata.controls['date'].touched)" class="alert">
+
+    <div  class="text-danger">
+    Date is required
+  </div>
+
+</div>
+
+   <div class="form-group mb-2">
+     <label  class="form-label">Due Date</label>
+     <input class="form-control" formControlName="due_Date"  type="text" onfocus="this.type='date'" placeholder="Select Due Date">
+   </div>
+
+
+
+      <!--vildation massage -->
+   <div *ngIf="formdata.controls['due_Date'].invalid && (formdata.controls['due_Date'].dirty || formdata.controls['due_Date'].touched)" class="alert">
+
+    <div  class="text-danger">
+      Due_Date is required
+  </div>
+
+    </div>
+
+   <div class="mx-auto text-center mt-5">
+     <button type="submit" class="btn btn-primary w-50 btndoc"   >Update</button>
+   </div>
+
+
+
+ </form>
+</div>
+
+

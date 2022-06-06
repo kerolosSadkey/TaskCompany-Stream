@@ -1,0 +1,46 @@
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Document</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Date</th>
+      <th scope="col">Created Date</th>
+       <th scope="col">Due Date</th>
+       <th scope="col">Update</th>
+       <th scope="col">Details</th>
+       <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of ListDocument;let i=index">
+     <tr>
+      <td >{{i+1}}</td>
+      <td>{{item.name}}</td>
+
+        <td>
+       <p *ngFor="let doc of item.documents">
+          <span>{{doc.path}}</span>
+
+      </p>
+       </td>
+       <td > <p [style.color]="item.priorityId==1 ? 'red' : item.priorityId==2  ? 'green' : item.priorityId==3 ? '#13265C' :null">{{item.priority}}</p></td>
+        <td>{{item.date | date:'short'}}</td>
+        <td>{{item.createdDate| date:'short'}}</td>
+         <td>{{item.due_date| date:'short'}}</td>
+         <td><a routerLink="/updatedocument/{{item.id}}"> <i class="fas fa-edit"></i></a></td>
+         <td><a  routerLink="/infodocument/{{item.id}}"><i class="fa fa-info-circle" aria-hidden="true"></i>
+
+         </a></td>
+         <td><button class="btn btn-outline-defualt" (click)="deleteDocument(item.id)"><i class="fa fa-times" aria-hidden="true"></i>
+
+         </button></td>
+
+    </tr>
+
+  </ng-container>
+
+
+  </tbody>
+</table>

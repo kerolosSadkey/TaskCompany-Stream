@@ -1,0 +1,45 @@
+.fa-edit{
+  color:darkcyan;
+  font-size: 18px;
+}
+.fa-info-circle
+{
+  font-size: 22px;
+}
+.fa-times
+{ color:crimson;
+  font-size: 22px;
+
+}
+p{
+  font-weight: 700;
+}
+
+
+  .table thead tr th {
+    background-color: #e8f4f6;
+    color: #0170ce;
+    text-align:center;
+}
+
+.table tbody tr:hover {
+    background-color: #e8f4f6;
+    color: #0170CF;
+}
+
+.table tbody tr {
+    color: #0170ce;
+    background-color: white;
+}
+.table tbody tr td {
+    vertical-align: middle;
+    text-align: center;
+}
+.table tbody tr td .btn-success:hover {
+    color: #28a745!important;
+    background-color: white;
+}
+.table tbody tr td .btn-danger:hover {
+   color: #dc3545 !important;
+   background-color: white;
+}

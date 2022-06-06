@@ -1,0 +1,84 @@
+
+
+<section class="vh-50 section" >
+  <div class="container p-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100 text-center">
+      <div class="card text-center">
+        <div class="card-header">
+          {{onedocument.name}}
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Date : {{onedocument.date | date:'short'}} </h3>
+          <h3 class="card-title"> Due Date : {{onedocument.due_date | date:'short'}}  </h3>
+          <h3 class="card-title">Created Date : {{onedocument.createdDate | date:'short' }}</h3>
+          <p class="card-text" > proirity of files<span [style.color]="onedocument.priorityId==1 ? 'red': onedocument.priorityId==2  ? 'green' :onedocument.priorityId==3 ? '#13265C' :null">
+            {{onedocument.priority}}
+          </span> </p>
+          <div *ngFor="let doc of onedocument.documents">
+            <p class="card-text mt-3 filebody"> {{doc.path}}</p>
+          </div>
+
+
+        </div>
+
+
+      </div>
+      <div class="col-9">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-light btn-lg" data-mdb-toggle="modal"
+          data-mdb-target="#exampleModal">
+          <i class="fas fa-info me-2"></i> Get information
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header border-bottom-0">
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <ng-container  *ngFor="let doc of onedocument.documents">
+
+
+
+                <p *ngIf="extdoc.test(doc.path) || extexcle.test(doc.path) || extmusic.test(doc.path)"> {{doc.path}} <button class="btn btn-primary" (click)="dowlond(doc.id)">dowlond</button> </p>
+
+                <div class="mb-5 divimg text-center mx-auto w-100" *ngIf="!extdoc.test(doc.path)  &&
+                !extpdf.test(doc.path) && !extexcle.test(doc.path) && extimg.test(doc.path) ">
+                <img  [src]="baseurl+doc.path"  class="imf-fluid" width="300" height="200" (click)="dowlondimg($event)" >
+                <a [href]="baseurl+doc.path" download class="">
+                  display</a>
+                </div>
+                <ngx-doc-viewer *ngIf="doc.path.includes('pdf')"
+                  [viewerUrl]="baseurl+doc.path"
+                  [url]="urlv"
+                  viewer="url"
+                  style="width:100%;height:50vh;"
+                >
+                </ngx-doc-viewer>
+                <ngx-doc-viewer *ngIf="isdown==doc.id" [hidden]="true"
+                  [url]="baseurl+doc.path"
+                  viewer="url"
+                  style="width:100%;height:50vh;"
+
+                >
+                </ngx-doc-viewer>
+
+
+
+
+                </ng-container>
+                <div class="progress form-group" *ngIf="progress > 0">
+                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
